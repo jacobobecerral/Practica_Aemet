@@ -65,7 +65,3 @@ La información se organiza en la tabla `temperaturas` con el siguiente esquema:
 | `tmax`     | REAL    | Temperatura máxima diaria (°C) |
 
 ---
-
-## Notas de Desarrollo
-- **Manejo de Datos**: El sistema está preparado para procesar los datos en fragmentos (chunks) para optimizar la memoria [cite: 2026-03-04].
-- **Gráficas**: Se recomienda usar el modo `x unified` en los gráficos de Plotly para una mejor lectura de las fechas.
