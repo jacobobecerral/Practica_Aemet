@@ -8,7 +8,15 @@ La configuración por defecto utiliza la estación **A Coruña (ID: 1387)**.
 
 ## Requisitos
 
-- **Python 3.13** o superior.
+- **Herramienta uv**: Necesaria para la gestión de dependencias y ejecución.
+  - **Windows (PowerShell)**:
+    ```powershell
+    powershell -ExecutionPolicy ByPass -c "irm https://astral.sh/uv/install.ps1 | iex"
+    ```
+  - **macOS/Linux**:
+    ```bash
+    curl -LsSf https://astral.sh/uv/install.sh | sh
+    ```
 - **API Key de AEMET**: Obtenible de forma gratuita en el [AEMET OpenData](https://opendata.aemet.es/).
 
 ---
@@ -18,14 +26,15 @@ La configuración por defecto utiliza la estación **A Coruña (ID: 1387)**.
 1. **Clonar el repositorio:**
    ```bash
    git clone <url-del-repositorio>
-   cd aemetProyecto
+   cd Tratamiento_Datos
    ```
 
 2. **Instalar dependencias:**
-   Se recomienda utilizar el archivo `requirements.txt` incluido para instalar todas las librerías necesarias (`requests`, `python-dotenv`, `streamlit`, `pandas`, `plotly`) de una sola vez:
+   Este proyecto utiliza `uv` para la gestión automática de dependencias. Solo necesitas ejecutar:
    ```bash
-   pip install -r requirements.txt
+   uv sync
    ```
+   *Nota: `uv run` también instalará automáticamente lo necesario si el entorno no está listo.*
 
 3. **Variables de entorno:**
    Crea un archivo llamado `.env` en la raíz del proyecto y añade tu clave:
@@ -41,7 +50,7 @@ El sistema se compone de dos módulos principales:
 
 ### 1. Extracción de Datos (`aemet.py`)
 Este script descarga los datos de los últimos días y los almacena en una base de datos SQLite local.
-- **Ejecución**: `python aemet.py`
+- **Ejecución**: `uv run aemet.py`
 - **Resultado**: Crea o actualiza el archivo `aemet_coruña.db`.
 
 ### 2. Visualización Interactiva (`graficas.py`)
@@ -49,7 +58,7 @@ Dashboard desarrollado con Streamlit que procesa la base de datos para mostrar:
 - **Métricas principales**: Temperatura máxima absoluta, mínima y promedio del periodo.
 - **Gráficos interactivos**: Comparativa de barras y líneas de tendencia mediante Plotly.
 - **Explorador**: Acceso a la tabla completa de registros.
-- **Ejecución**: `streamlit run graficas.py`
+- **Ejecución**: `uv run streamlit run graficas.py`
 
 ---
 
